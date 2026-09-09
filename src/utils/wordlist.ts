@@ -1,5 +1,5 @@
 
-const WORDS = [
+export const WORDS = [
   // Original words
   "PLANT", "GLASS", "FAITH", "LEMON", "SWEET", "BRAND",
   "GRACE", "SHEET", "SHARE", "SOUND", "STORM", "CABLE",

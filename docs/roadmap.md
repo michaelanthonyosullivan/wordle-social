@@ -26,9 +26,9 @@ Accounts, server-side leaderboards, logins, real matchmaking.
 
 ## Suggested build order (MVP then iterate)
 
-1. Daily seed + persisted streak/stats modal
-2. Emoji share-to-clipboard button
-3. Unlimited / free-play mode
+1. ✅ Daily seed + persisted streak/stats modal — DONE (see `src/utils/daily.ts`, `src/utils/stats.ts`, `StatsDialog`)
+2. ✅ Emoji share-to-clipboard button — DONE (see `src/utils/share.ts`; the 📣 Share button copies the result after each round)
+3. ✅ Unlimited / free-play mode — DONE (Daily / Free Practice mode toggle)
 4. Settings variations (length / tries)
 5. Friend "beat my score" rematch + word packs
 
