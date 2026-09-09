@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 150 30% 4%; /* near-black green */
+    --foreground: 140 40% 96%;
+
+    --card: 150 30% 7%;
+    --card-foreground: 140 40% 96%;
+
+    --popover: 150 30% 7%;
+    --popover-foreground: 140 40% 96%;
+
+    --primary: 145 70% 37%; /* bold green #1fa055 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 150 20% 16%;
+    --secondary-foreground: 140 40% 96%;
+
+    --muted: 150 18% 14%;
+    --muted-foreground: 145 12% 62%;
+
+    --accent: 152 65% 42%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 142 40% 22%;
+    --input: 142 40% 22%;
+    --ring: 150 80% 45%;
+
+    --radius: 0.75rem;
+  }
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background: radial-gradient(1200px 800px at 50% -10%, #122b1a 0%, #05080b 55%, #020302 100%);
+  background-attachment: fixed;
+  color: hsl(var(--foreground));
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Framed board + keyboard panels */
+.wordle-card,
+.wordle-keyboard-card {
+  border-radius: 1rem;
+  background: linear-gradient(180deg, hsl(150 30% 8%), hsl(150 34% 4%));
+  border: 2px solid hsl(145 75% 42%);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.65), inset 0 0 22px rgba(31, 157, 85, 0.15);
+}
