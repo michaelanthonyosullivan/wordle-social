@@ -1,7 +1,7 @@
-import { WORDS } from "./wordlist";
+import { ANSWER_WORDS } from "./wordData";
 
 // All helpers here derive the "shared daily word" purely from the calendar date,
-// using only the static, built-in word list — never player-added words — so that
+// using only the static, curated answer list — never player-added words — so that
 // every friend who plays gets the exact same word on the same day.
 
 /** Local YYYY-MM-DD key for a given date (defaults to today). */
@@ -28,7 +28,7 @@ export function dailyPuzzleNumber(key: string): number {
  * scores are comparable within the friend group on the same day.
  */
 export function getDailyWord(d: Date = new Date()): string {
-  const words = WORDS;
+  const words = ANSWER_WORDS;
   const dn = dayNumber(dateKey(d));
   const idx = ((dn % words.length) + words.length) % words.length;
   return words[idx];

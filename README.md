@@ -10,6 +10,15 @@ Guess the secret 5-letter word in six tries. Each guess colours the tiles to sho
 
 Not sure your guess is a real word? The game will offer to add it to the word list for future games (stored in your browser).
 
+## Word list
+
+Uses the canonical Wordle lists, split into two tiers like the real game:
+
+- **2,309 answer words** — a curated, common-word pool that the daily and practice secrets are drawn from (so solutions stay guessable).
+- **14,855 valid guesses** — the full dictionary accepted when you submit a word.
+
+Player-added words are accepted as guesses only; they never become a secret answer.
+
 ## Play modes
 
 - **Daily** — everyone plays the same word each calendar day, picked purely from the built-in word list by the date, so scores are comparable with friends. Results are recorded once per day.
