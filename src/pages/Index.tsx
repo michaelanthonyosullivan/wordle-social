@@ -9,28 +9,46 @@ import { dateKey, getDailyWord, dailyPuzzleNumber } from "@/utils/daily";
 import { loadStats, recordDailyResult, type DailyStats } from "@/utils/stats";
 import { MAX_GUESSES } from "@/utils/stats";
 import { copyShareText, type ShareResult } from "@/utils/share";
+import { loadRound, saveRound, resultFromRound } from "@/utils/gameState";
+import type { Mode, Status } from "@/utils/gameState";
 import { toast } from "@/hooks/use-toast";
 
 const WORD_LENGTH = 5;
 
-type Mode = "daily" | "practice";
-type Status = "playing" | "won" | "lost";
-
 const dayKey = dateKey();
 
+// Restore any in-progress round (same-day Daily, or any Practice) on first load.
+const restored = loadRound(dayKey);
+
 const Index = () => {
-  const [mode, setMode] = useState<Mode>("daily");
-  const [solution, setSolution] = useState(() => getDailyWord());
-  const [guesses, setGuesses] = useState<string[]>([]);
-  const [currentGuess, setCurrentGuess] = useState("");
-  const [status, setStatus] = useState<Status>("playing");
+  const [mode, setMode] = useState<Mode>(() => restored?.mode ?? "daily");
+  const [solution, setSolution] = useState(
+    () => restored?.solution ?? getDailyWord()
+  );
+  const [guesses, setGuesses] = useState<string[]>(() => restored?.guesses ?? []);
+  const [currentGuess, setCurrentGuess] = useState(() => restored?.currentGuess ?? "");
+  const [status, setStatus] = useState<Status>(() => restored?.status ?? "playing");
   const [showInstructions, setShowInstructions] = useState(false);
   const [showWordValidation, setShowWordValidation] = useState(false);
   const [pendingWord, setPendingWord] = useState("");
   const [showStats, setShowStats] = useState(false);
   const [stats, setStats] = useState<DailyStats>(() => loadStats());
   // The most recent finished round, used to build the emoji share block.
-  const [result, setResult] = useState<ShareResult | null>(null);
+  const [result, setResult] = useState<ShareResult | null>(() =>
+    restored ? resultFromRound(restored) : null
+  );
+
+  // Persist the round on every change so a reload/shutdown resumes mid-game.
+  React.useEffect(() => {
+    saveRound({
+      mode,
+      solution,
+      guesses,
+      currentGuess,
+      status,
+      dayKey: mode === "daily" ? dayKey : undefined,
+    });
+  }, [mode, solution, guesses, currentGuess, status]);
 
   // Finish the current round: mark status, persist daily stats once, stash a
   // shareable result. `finalGuesses` already includes the final guess.
